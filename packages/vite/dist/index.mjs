@@ -39,7 +39,7 @@ function imagetools(userOptions = {}) {
                     ? pluginOptions.defaultDirectives(id)
                     : pluginOptions.defaultDirectives;
                 const { transforms } = generateTransforms({ ...defaultConfig, ...config }, transformFactories);
-                const { image, metadata } = await applyTransforms(transforms, img, pluginOptions.removeMetadata);
+                const { image, metadata } = await applyTransforms(transforms, img.clone(), pluginOptions.removeMetadata);
                 generatedImages.set(id, image);
                 if (!this.meta.watchMode) {
                     const fileName = basename(srcURL.pathname, extname(srcURL.pathname)) + `.${metadata.format}`;

@@ -1,5 +1,5 @@
 import { TransformFactory, OutputFormat, resolveConfigs } from 'imagetools-core';
-export interface VitePluginOptions {
+export interface RollupPluginOptions {
     /**
      * Which paths to include when processing images.
      * @default '**\/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}?*'
@@ -7,8 +7,7 @@ export interface VitePluginOptions {
     include: Array<string | RegExp> | string | RegExp;
     /**
      * What paths to exclude when processing images.
-     * This defaults to the public dir to mirror vites behavior.
-     * @default 'public\/**\/*'
+     * @default ''
      */
     exclude: Array<string | RegExp> | string | RegExp;
     /**
@@ -43,9 +42,4 @@ export interface VitePluginOptions {
      * @default true
      */
     removeMetadata: boolean;
-    /**
-     * This option used to enable the plugin during development mode. This option is no longer required!
-     * @deprecated
-     */
-    force?: boolean;
 }
