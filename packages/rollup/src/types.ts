@@ -1,6 +1,6 @@
-import { TransformFactory, OutputFormat } from 'imagetools-core'
+import { TransformFactory, OutputFormat, resolveConfigs } from 'imagetools-core'
 
-export interface PluginOptions {
+export interface RollupPluginOptions {
   /**
    * Which paths to include when processing images.
    * @default '**\/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}?*'
@@ -31,6 +31,12 @@ export interface PluginOptions {
    * @default []
    */
   extendOutputFormats?: (builtins: Record<string, OutputFormat>) => Record<string, OutputFormat>
+
+  /**
+   * You can use this option to override the resolution of configs based on the url parameters
+   * @default undefined
+   */
+  resolveConfigs?: typeof resolveConfigs
 
   /**
    * Settings this option to true disables all warnings produced by this plugin

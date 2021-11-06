@@ -11,19 +11,19 @@ import {
   extractEntries
 } from 'imagetools-core'
 import { createFilter, dataToEsm } from '@rollup/pluginutils'
-import { PluginOptions } from './types'
+import { RollupPluginOptions } from './types'
 import MagicString from 'magic-string'
 import { basename, extname, resolve, dirname } from 'path'
 
-const defaultOptions: PluginOptions = {
+const defaultOptions: RollupPluginOptions = {
   include: '**/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}?*',
   exclude: '',
   silent: false,
   removeMetadata: true
 }
 
-export function imagetools(userOptions: Partial<PluginOptions> = {}): Plugin {
-  const pluginOptions: PluginOptions = { ...defaultOptions, ...userOptions }
+export function imagetools(userOptions: Partial<RollupPluginOptions> = {}): Plugin {
+  const pluginOptions: RollupPluginOptions = { ...defaultOptions, ...userOptions }
 
   const filter = createFilter(pluginOptions.include, pluginOptions.exclude)
 
@@ -46,7 +46,7 @@ export function imagetools(userOptions: Partial<PluginOptions> = {}): Plugin {
 
       const srcURL = parseURL(id)
       const parameters = extractEntries(srcURL)
-      const imageConfigs = resolveConfigs(parameters, outputFormats)
+      const imageConfigs = pluginOptions.resolveConfigs?.(parameters, outputFormats) || resolveConfigs(parameters, outputFormats)
 
       const img = loadImage(decodeURIComponent(srcURL.pathname))
 

@@ -1,6 +1,6 @@
 import { TransformFactory, OutputFormat, resolveConfigs } from 'imagetools-core'
 
-export interface PluginOptions {
+export interface VitePluginOptions {
   /**
    * Which paths to include when processing images.
    * @default '**\/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}?*'
@@ -33,6 +33,10 @@ export interface PluginOptions {
    */
   extendOutputFormats?: (builtins: Record<string, OutputFormat>) => Record<string, OutputFormat>
 
+  /**
+   * You can use this option to override the resolution of configs based on the url parameters
+   * @default undefined
+   */
   resolveConfigs?: typeof resolveConfigs
 
   /**
